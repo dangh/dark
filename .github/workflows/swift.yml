@@ -18,17 +18,21 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build
       run: swiftc dark.swift
-    - uses: actions/upload-artifact@v4
+    - name: Release
+      uses: softprops/action-gh-release@v2
       with:
-        name: build
-        path: dark
-        retention-days: 90
-        compression-level: 0
-        overwrite: true
-    - name: Update Homebrew formula
-      uses: dawidd6/action-homebrew-bump-formula@v3
-      with:
-        token: ${{secrets.HOMEBREW_GITHUB_ACTION_TOKEN}}
-        no_fork: true
-        tap: dangh/homebrew-formulae
-        formula: dark
+        files: dark
+    # - uses: actions/upload-artifact@v4
+    #   with:
+    #     name: build
+    #     path: dark
+    #     retention-days: 90
+    #     compression-level: 0
+    #     overwrite: true
+    # - name: Update Homebrew formula
+    #   uses: dawidd6/action-homebrew-bump-formula@v3
+    #   with:
+    #     token: ${{secrets.HOMEBREW_GITHUB_ACTION_TOKEN}}
+    #     no_fork: true
+    #     tap: dangh/homebrew-formulae
+    #     formula: dark
