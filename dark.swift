@@ -9,10 +9,12 @@ func printAppearance() {
     fflush(stdout)
 }
 
-DistributedNotificationCenter.default().addObserver(forName: Notification.Name("AppleInterfaceThemeChangedNotification"), object: nil, queue: nil) { _ in
-    printAppearance()
-}
-
 printAppearance()
 
-NSApplication.shared.run()
+if CommandLine.arguments.contains("-w") {
+    DistributedNotificationCenter.default().addObserver(forName: Notification.Name("AppleInterfaceThemeChangedNotification"), object: nil, queue: nil) { _ in
+        printAppearance()
+    }
+    
+    NSApplication.shared.run()
+}
